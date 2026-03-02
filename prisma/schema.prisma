@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model FinanceRecord {
+  id              Int      @id @default(autoincrement())
+  date            DateTime
+  jaganEarnings   Float    @default(0)
+  jaganExpenses   Float    @default(0)
+  sunithaEarnings Float    @default(0)
+  sunithaExpenses Float    @default(0)
+  saiEarnings     Float    @default(0)
+  saiExpenses     Float    @default(0)
+  dailyExpenses   Float    @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
