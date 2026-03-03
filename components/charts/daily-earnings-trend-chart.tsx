@@ -23,7 +23,7 @@ interface DailyEarningsTrendChartProps {
 export function DailyEarningsTrendChart({ data }: DailyEarningsTrendChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+      <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
         <XAxis 
           dataKey="date" 
@@ -34,22 +34,26 @@ export function DailyEarningsTrendChart({ data }: DailyEarningsTrendChartProps) 
             const date = new Date(value)
             return `${date.getMonth() + 1}/${date.getDate()}`
           }}
+          fontSize={10}
         />
         <YAxis 
           className="text-xs fill-muted-foreground"
           tickLine={false}
           axisLine={false}
           tickFormatter={(value) => `₹${value}`}
+          fontSize={10}
+          width={40}
         />
         <Tooltip 
           contentStyle={{ 
             backgroundColor: 'hsl(var(--card))', 
             border: '1px solid hsl(var(--border))',
-            borderRadius: '8px'
+            borderRadius: '8px',
+            fontSize: '12px',
           }}
           formatter={(value: number) => [`₹${value}`, '']}
         />
-        <Legend />
+        <Legend wrapperStyle={{ fontSize: '12px' }} />
         <Line 
           type="monotone" 
           dataKey="jaganEarnings" 

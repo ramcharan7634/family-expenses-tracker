@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ContributionPieChart } from '@/components/charts/contribution-pie-chart'
 import { ExpenseBarChart } from '@/components/charts/expense-bar-chart'
 import { formatCurrency, formatPercentage } from '@/lib/utils'
-import { Loader2, TrendingUp, TrendingDown, AlertTriangle, CheckCircle, User, DollarSign, Percent, Calendar } from 'lucide-react'
+import { Loader2, TrendingUp, TrendingDown, AlertTriangle, CheckCircle, User, Percent, Calendar } from 'lucide-react'
 
 interface AnalyticsData {
   individualSavings: Array<{
@@ -132,7 +132,7 @@ export default function AnalyticsPage() {
       </div>
 
       <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList>
+        <TabsList className="flex-wrap md:flex-nowrap">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="individuals">Individuals</TabsTrigger>
           <TabsTrigger value="trends">Trends</TabsTrigger>
@@ -143,9 +143,9 @@ export default function AnalyticsPage() {
         <TabsContent value="overview" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
-              <CardHeader>
-                <CardTitle>Expense Distribution</CardTitle>
-                <CardDescription>How expenses are split across family members</CardDescription>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base md:text-lg">Expense Distribution</CardTitle>
+                <CardDescription className="text-xs md:text-sm">How expenses are split across family members</CardDescription>
               </CardHeader>
               <CardContent>
                 <ContributionPieChart
@@ -162,9 +162,9 @@ export default function AnalyticsPage() {
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle>Monthly Comparison</CardTitle>
-                <CardDescription>Earnings vs Expenses by month</CardDescription>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base md:text-lg">Monthly Comparison</CardTitle>
+                <CardDescription className="text-xs md:text-sm">Earnings vs Expenses by month</CardDescription>
               </CardHeader>
               <CardContent>
                 <ExpenseBarChart
@@ -177,7 +177,7 @@ export default function AnalyticsPage() {
 
         {/* Individuals Tab */}
         <TabsContent value="individuals" className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {analytics?.individualSavings.map((person, index) => (
               <Card key={person.name}>
                 <CardHeader>
@@ -222,16 +222,16 @@ export default function AnalyticsPage() {
         {/* Trends Tab */}
         <TabsContent value="trends" className="space-y-4">
           <Card>
-            <CardHeader>
-              <CardTitle>Monthly Savings Trend</CardTitle>
-              <CardDescription>Cumulative savings over time</CardDescription>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base md:text-lg">Monthly Savings Trend</CardTitle>
+              <CardDescription className="text-xs md:text-sm">Cumulative savings over time</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="space-y-3 md:space-y-4">
                 {analytics?.savingsTrends.map((trend, index) => (
-                  <div key={trend.month} className="flex items-center justify-between">
-                    <span className="font-medium">{trend.month}</span>
-                    <div className="flex items-center gap-4">
+                  <div key={trend.month} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg bg-muted/50">
+                    <span className="font-medium text-sm md:text-base">{trend.month}</span>
+                    <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm">
                       <span className="text-muted-foreground">
                         Monthly: {formatCurrency(trend.savings)}
                       </span>

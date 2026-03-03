@@ -44,14 +44,14 @@ export default function UploadPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Upload Data</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">Upload Data</h1>
         <p className="text-muted-foreground mt-1">Import financial records from Excel or CSV files</p>
       </div>
 
       <div className="grid gap-6">
         {/* Upload Section */}
-        <div className="rounded-xl border bg-card p-6">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="rounded-xl border bg-card p-4 md:p-6">
+          <div className="flex items-center gap-3 mb-4 md:mb-6">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
               <Upload className="h-5 w-5 text-primary" />
             </div>
@@ -64,7 +64,7 @@ export default function UploadPage() {
         </div>
 
         {/* Format Instructions */}
-        <div className="rounded-xl border bg-card p-6">
+        <div className="rounded-xl border bg-card p-4 md:p-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10">
               <FileSpreadsheet className="h-5 w-5 text-blue-500" />

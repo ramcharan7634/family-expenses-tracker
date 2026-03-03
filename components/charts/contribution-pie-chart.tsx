@@ -33,8 +33,8 @@ export function ContributionPieChart({ data }: ContributionPieChartProps) {
           data={data}
           cx="50%"
           cy="50%"
-          innerRadius={60}
-          outerRadius={100}
+          innerRadius={50}
+          outerRadius={80}
           paddingAngle={2}
           dataKey="value"
           label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
@@ -49,10 +49,11 @@ export function ContributionPieChart({ data }: ContributionPieChartProps) {
             backgroundColor: 'hsl(var(--card))',
             border: '1px solid hsl(var(--border))',
             borderRadius: '8px',
+            fontSize: '12px',
           }}
           formatter={(value: number) => [`₹${value.toLocaleString()}`, '']}
         />
-        <Legend />
+        <Legend wrapperStyle={{ fontSize: '12px' }} />
       </PieChart>
     </ResponsiveContainer>
   )

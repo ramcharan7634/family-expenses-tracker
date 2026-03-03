@@ -67,11 +67,11 @@ export default function RecordsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Records</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">Records</h1>
         <p className="text-muted-foreground mt-1">View and manage all financial records</p>
       </div>
 
-      <div className="rounded-xl border bg-card p-6">
+      <div className="rounded-xl border bg-card p-4 md:p-6">
         <DataTable
           columns={columns}
           data={records}

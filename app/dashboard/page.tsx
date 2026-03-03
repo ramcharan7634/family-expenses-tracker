@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { DollarSign, TrendingUp, TrendingDown, PiggyBank, Loader2, Calendar } from 'lucide-react'
+import { IndianRupee, TrendingUp, TrendingDown, PiggyBank, Loader2, Calendar } from 'lucide-react'
 import { StatCard } from '@/components/dashboard/stat-card'
 import { EarningsExpensesChart } from '@/components/charts/earnings-expenses-chart'
 import { ContributionPieChart } from '@/components/charts/contribution-pie-chart'
@@ -127,11 +127,11 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <StatCard
           title="Total Earnings"
           value={formatCurrency(stats?.totalEarnings || 0)}
-          icon={DollarSign}
+          icon={IndianRupee}
           iconColor="bg-green-500/10 text-green-500"
           delay={100}
         />
@@ -159,33 +159,33 @@ export default function DashboardPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         {/* Earnings vs Expenses */}
-        <div className="rounded-xl border bg-card p-6">
+        <div className="rounded-xl border bg-card p-4 md:p-6">
           <h3 className="text-lg font-semibold mb-4">Earnings vs Expenses</h3>
           <EarningsExpensesChart data={stats?.monthlyData || []} />
         </div>
 
         {/* Contribution Pie Chart */}
-        <div className="rounded-xl border bg-card p-6">
+        <div className="rounded-xl border bg-card p-4 md:p-6">
           <h3 className="text-lg font-semibold mb-4">Individual Contributions</h3>
           <ContributionPieChart data={contributionData} />
         </div>
 
         {/* Expense Bar Chart */}
-        <div className="rounded-xl border bg-card p-6">
+        <div className="rounded-xl border bg-card p-4 md:p-6">
           <h3 className="text-lg font-semibold mb-4">Monthly Expenses</h3>
           <ExpenseBarChart data={stats?.monthlyData || []} />
         </div>
 
         {/* Daily Expenses Trend */}
-        <div className="rounded-xl border bg-card p-6">
+        <div className="rounded-xl border bg-card p-4 md:p-6">
           <h3 className="text-lg font-semibold mb-4">Daily Expenses Trend</h3>
           <DailyTrendChart data={stats?.dailyData || []} />
         </div>
 
         {/* Daily Earnings Trend */}
-        <div className="rounded-xl border bg-card p-6 lg:col-span-2">
+        <div className="rounded-xl border bg-card p-4 md:p-6 lg:col-span-2">
           <h3 className="text-lg font-semibold mb-4">Daily Earnings Trend</h3>
           <DailyEarningsTrendChart data={stats?.dailyEarningsData || []} />
         </div>

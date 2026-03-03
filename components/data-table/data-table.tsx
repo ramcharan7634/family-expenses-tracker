@@ -85,15 +85,15 @@ export function DataTable({ columns, data, onDelete }: DataTableProps) {
         />
       </div>
 
-      {/* Table */}
-      <div className="rounded-md border">
-        <table className="w-full">
+      {/* Table - Horizontal scroll wrapper for mobile */}
+      <div className="overflow-x-auto rounded-md border">
+        <table className="w-full min-w-[600px]">
           <thead className="bg-muted">
             <tr>
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className="px-4 py-3 text-left text-sm font-medium cursor-pointer hover:bg-muted/80"
+                  className="px-3 md:px-4 py-3 text-left text-sm font-medium cursor-pointer hover:bg-muted/80"
                   onClick={() => column.sortable && handleSort(column.key)}
                 >
                   <div className="flex items-center gap-2">
@@ -106,19 +106,19 @@ export function DataTable({ columns, data, onDelete }: DataTableProps) {
                   </div>
                 </th>
               ))}
-              {onDelete && <th className="px-4 py-3 text-right text-sm font-medium">Actions</th>}
+              {onDelete && <th className="px-3 md:px-4 py-3 text-right text-sm font-medium">Actions</th>}
             </tr>
           </thead>
           <tbody className="divide-y">
             {paginatedData.map((row, index) => (
               <tr key={index} className="hover:bg-muted/50">
                 {columns.map((column) => (
-                  <td key={column.key} className="px-4 py-3 text-sm">
+                  <td key={column.key} className="px-3 md:px-4 py-3 text-sm">
                     {formatValue(column.key, row[column.key])}
                   </td>
                 ))}
                 {onDelete && (
-                  <td className="px-4 py-3 text-right">
+                  <td className="px-3 md:px-4 py-3 text-right">
                     <Button
                       variant="ghost"
                       size="icon"

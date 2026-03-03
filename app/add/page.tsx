@@ -36,15 +36,15 @@ export default function AddPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Add Record</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">Add Record</h1>
         <p className="text-muted-foreground mt-1">Manually add a new financial record</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <CardHeader>
-            <CardTitle>New Record</CardTitle>
-            <CardDescription>Enter the financial details for a single day</CardDescription>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base md:text-lg">New Record</CardTitle>
+            <CardDescription className="text-xs md:text-sm">Enter the financial details for a single day</CardDescription>
           </CardHeader>
           <CardContent>
             <ManualEntryForm onSubmit={handleSubmit} isSubmitting={isSubmitting} />

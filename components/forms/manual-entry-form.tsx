@@ -61,7 +61,7 @@ export function ManualEntryForm({ onSubmit, isSubmitting }: ManualEntryFormProps
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
         {/* Jagan Section */}
         <div className="space-y-2">
           <Label htmlFor="jaganEarnings">Jagan Earnings</Label>
@@ -120,7 +120,7 @@ export function ManualEntryForm({ onSubmit, isSubmitting }: ManualEntryFormProps
         )}
       </div>
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
+      <Button type="submit" className="w-full h-10 md:h-11" disabled={isSubmitting}>
         {isSubmitting ? 'Saving...' : 'Save Record'}
       </Button>
     </form>
