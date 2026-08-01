@@ -50,50 +50,65 @@ export default function DashboardPage() {
   }, [selectedMonth])
 
   const fetchMonths = async () => {
-    try {
-      const res = await fetch('/api/stats/months')
-      const data = await res.json()
-      
-      if (Array.isArray(data) && data.length > 0) {
-        const months: MonthOption[] = [
-          { value: '', label: 'Last 6 Months' },
-          ...data.map((monthValue: string) => ({
-            value: monthValue,
-            label: formatMonthLabel(monthValue),
-          }))
-        ]
-        setAvailableMonths(months)
-      } else {
-        // Fallback if no months returned
-        setAvailableMonths([{ value: '', label: 'Last 6 Months' }])
-      }
-    } catch (error) {
-      console.error('Failed to fetch months:', error)
-      setAvailableMonths([{ value: '', label: 'Last 6 Months' }])
+  try {
+    const res = await fetch('/api/stats/months')
+    const data = await res.json()
+
+    if (Array.isArray(data) && data.length > 0) {
+      const months: MonthOption[] = [
+        {
+          value: '',
+          label: 'All Months',
+        },
+        ...data.map((monthValue: string) => ({
+          value: monthValue,
+          label: formatMonthLabel(monthValue),
+        })),
+      ]
+
+      setAvailableMonths(months)
+    } else {
+      setAvailableMonths([
+        {
+          value: '',
+          label: 'All Months',
+        },
+      ])
     }
+  } catch (error) {
+    console.error('Failed to fetch months:', error)
+
+    setAvailableMonths([
+      {
+        value: '',
+        label: 'All Months',
+      },
+    ])
   }
+}
 
   const fetchStats = async () => {
-    setLoading(true)
-    try {
-      const monthParam = selectedMonth ? `&month=${selectedMonth}` : ''
-      const res = await fetch(`/api/stats?months=6${monthParam}`)
-      const data = await res.json()
-      setStats(data)
-    } catch (error) {
-      console.error('Failed to fetch stats:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
+  setLoading(true)
 
-  if (loading && !stats) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    )
+  try {
+    let url = '/api/stats'
+
+    if (selectedMonth) {
+      url += `?month=${selectedMonth}`
+    } else {
+      url += '?months=all'
+    }
+
+    const res = await fetch(url)
+    const data = await res.json()
+
+    setStats(data)
+  } catch (error) {
+    console.error('Failed to fetch stats:', error)
+  } finally {
+    setLoading(false)
   }
+}
 
   const contributionData = stats ? [
     { name: 'Jagan', value: stats.individualEarnings.jagan, color: 'hsl(var(--chart-1))' },

@@ -67,7 +67,7 @@ export default function AnalyticsPage() {
       
       if (Array.isArray(data) && data.length > 0) {
         const months: MonthOption[] = [
-          { value: '', label: 'Last 6 Months' },
+          { value: '', label: 'All Months' },
           ...data.map((monthValue: string) => ({
             value: monthValue,
             label: formatMonthLabel(monthValue),
@@ -76,7 +76,7 @@ export default function AnalyticsPage() {
         setAvailableMonths(months)
       } else {
         // Fallback if no months returned
-        setAvailableMonths([{ value: '', label: 'Last 6 Months' }])
+        setAvailableMonths([{ value: '', label: 'All Months' }])
       }
     } catch (error) {
       console.error('Failed to fetch months:', error)
@@ -85,26 +85,27 @@ export default function AnalyticsPage() {
   }
 
   const fetchAnalytics = async () => {
-    setLoading(true)
-    try {
-      const monthParam = selectedMonth ? `&month=${selectedMonth}` : ''
-      const res = await fetch(`/api/analytics?months=6${monthParam}`)
-      const data = await res.json()
-      setAnalytics(data)
-    } catch (error) {
-      console.error('Failed to fetch analytics:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
+  setLoading(true)
 
-  if (loading && !analytics) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    )
+  try {
+    let url = '/api/analytics'
+
+    if (selectedMonth) {
+      url += `?month=${selectedMonth}`
+    } else {
+      url += '?months=all'
+    }
+
+    const res = await fetch(url)
+    const data = await res.json()
+
+    setAnalytics(data)
+  } catch (error) {
+    console.error('Failed to fetch analytics:', error)
+  } finally {
+    setLoading(false)
   }
+}
 
   return (
     <div className="space-y-6">
